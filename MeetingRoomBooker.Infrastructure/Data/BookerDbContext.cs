@@ -10,7 +10,8 @@ namespace MeetingRoomBooker.Infrastructure.Data
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlite("Data source=booker.db");
+            var dbPath = Path.Combine("..", "MeetingRoomBooker.Infrastructure", "booker.db");
+            optionsBuilder.UseSqlite($"Data source={dbPath}");
         }
     }
 }

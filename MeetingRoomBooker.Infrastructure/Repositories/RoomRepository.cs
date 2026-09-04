@@ -31,7 +31,7 @@ namespace MeetingRoomBooker.Infrastructure.Repositories
         {
             return context.Rooms
                 .Include(r => r.Bookings)
-                .Where(r => r.Bookings.Where(b => b.BookStart >= start && b.BookStart <= end || b.BookEnd >= start && b.BookEnd <= end) == null);
+                .Where(r => !r.Bookings.Any(b => b.BookStart < end && b.BookEnd > start));
         }
 
         public void AddRoom(Room room)

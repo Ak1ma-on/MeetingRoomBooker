@@ -1,4 +1,5 @@
 ﻿using MeetingRoomBooker.Application.Interfaces;
+using MeetingRoomBooker.Application.OperationResults;
 using MeetingRoomBooker.Domain.Entities;
 
 namespace MeetingRoomBooker.Application.Services
@@ -12,19 +13,20 @@ namespace MeetingRoomBooker.Application.Services
             roomRepository = repository;
         }
 
-        public async Task RegisterRoomAsync(int number)
+        public RegisterRoomResult RegisterRoom(int number)
         {
-            if (number <= 0) throw new ArgumentOutOfRangeException($"Incorrect number of room: {nameof(number)}");
+            if (number <= 0) return RegisterRoomResult.InvalidNumber;
 
             Room room = new Room(number);
-            await roomRepository.AddRoomAsync(room);
+            roomRepository.AddRoom(room);
+            return RegisterRoomResult.Success;
         }
 
-        public async Task<IReadOnlyList<Room>> GetFreeRoomsAsync(DateTime start, DateTime end)
+        public IEnumerable<Room> GetFreeRooms(DateTime start, DateTime end)
         {
             if (start >= end) throw new ArgumentException("Incorrect timespan");
 
-            return await roomRepository.GetFreeRoomsAsync(start, end);
+            return roomRepository.GetFreeRooms(start, end);
         }
     }
 }

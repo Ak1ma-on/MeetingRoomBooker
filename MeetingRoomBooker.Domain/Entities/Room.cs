@@ -6,6 +6,8 @@
         public int Number { get; private set; }
         public ICollection<Booking> Bookings { get; private set; } = [];
 
+        private Room() { }
+
         public Room(int number)
         {
             Number = number;

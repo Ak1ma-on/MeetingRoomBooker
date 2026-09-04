@@ -9,6 +9,8 @@ namespace MeetingRoomBooker.Domain.Entities
         public DateTime BookStart { get; private set; }
         public DateTime BookEnd { get; private set; }
 
+        private Booking() { }
+
         public Booking(int roomId, DateTime bookStart, DateTime bookEnd, IClock clock)
         {
             DateTime now = clock.Now;

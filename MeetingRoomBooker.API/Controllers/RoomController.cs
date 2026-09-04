@@ -24,7 +24,7 @@ namespace MeetingRoomBooker.API.Controllers
             return NoContent();
         }
 
-        [HttpGet]
+        [HttpPost]
         public ActionResult<List<Room>> GetFreeRooms([FromBody] GetFreeRoomsRequest timeSpan)
         {
             var freeRooms = roomService.GetFreeRooms(timeSpan.Start, timeSpan.End);

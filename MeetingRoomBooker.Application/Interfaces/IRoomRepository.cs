@@ -1,11 +1,12 @@
 ﻿using MeetingRoomBooker.Domain.Entities;
+using MeetingRoomBooker.Infrastructure.OperationResults;
 
 namespace MeetingRoomBooker.Application.Interfaces
 {
     public interface IRoomRepository
     {
-        public Task<IReadOnlyList<Room>> GetFreeRoomsAsync(DateTime start, DateTime end);
-        public Task AddRoomAsync(Room room);
-        public Task<Room> GetByNumberAsync(int number);
+        public IEnumerable<Room> GetFreeRooms(DateTime start, DateTime end);
+        public void AddRoom(Room room);
+        public GetRoomResult GetByNumber(int number);
     }
 }

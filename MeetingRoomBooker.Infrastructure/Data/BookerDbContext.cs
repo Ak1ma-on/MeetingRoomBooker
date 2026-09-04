@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace MeetingRoomBooker.Infrastructure.Data
 {
-    internal class BookerDbContext : DbContext
+    public class BookerDbContext : DbContext
     {
         public DbSet<Room> Rooms { get; set; }
         public DbSet<Booking> Bookings { get; set; }

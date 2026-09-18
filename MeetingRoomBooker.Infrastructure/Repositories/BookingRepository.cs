@@ -19,12 +19,12 @@ namespace MeetingRoomBooker.Infrastructure.Repositories
             await context.SaveChangesAsync();
         }
 
-        public async Task<bool> HasOverlapAsync(Booking booking)
+        public async Task<bool> HasOverlapAsync(Booking newBooking)
         {
-            Room? room = await context.Rooms.SingleOrDefaultAsync(r => r.Id == booking.RoomId);
+            Room? room = await context.Rooms.SingleOrDefaultAsync(r => r.Id == newBooking.RoomId);
 
             List<Booking> conflictBookings = context.Bookings
-                .Where(b => b.BookStart >= booking.BookStart && b.BookStart <= booking.BookEnd || b.BookEnd >= booking.BookStart && b.BookEnd <= booking.BookEnd).ToList();
+                .Where(b => b.BookStart >= newBooking.BookStart && b.BookStart < newBooking.BookEnd || b.BookEnd > newBooking.BookStart && b.BookEnd <= newBooking.BookEnd).ToList();
 
             return conflictBookings.Count != 0;
         }

@@ -2,6 +2,7 @@
 using MeetingRoomBooker.Domain.Entities;
 using MeetingRoomBooker.Domain.Interfaces;
 using MeetingRoomBooker.Application.OperationResults;
+using System.Text.RegularExpressions;
 
 namespace MeetingRoomBooker.Application.Services
 {
@@ -20,13 +21,17 @@ namespace MeetingRoomBooker.Application.Services
 
         public async Task<AddBookingResult> AddBookingAsync(int roomNumber, DateTime start, DateTime end)
         {
-            if (start > end) return AddBookingResult.IncorrectTimeSpan;
+            if (start >= end) return AddBookingResult.IncorrectTimeSpan;
             if (roomNumber <= 0) return AddBookingResult.IncorrectRoomNumber;
 
             Room room = roomRepository.GetByNumber(roomNumber).Room;
             if (room is null) return AddBookingResult.RoomHasNotFound;
 
             Booking booking = new Booking(room.Id, start, end, clock);
+            var isBooked = await bookingRepository.HasOverlapAsync(booking);
+
+            if (isBooked) return AddBookingResult.BookingHasOverlap;
+
             await bookingRepository.AddBookingAsync(booking);
             return AddBookingResult.Success;
         }

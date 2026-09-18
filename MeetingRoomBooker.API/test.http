@@ -1,4 +1,4 @@
-﻿POST https://localhost:7265/api/room
+﻿POST https://localhost:7265/api/room/free
 Content-Type: application/json
 
 {
@@ -8,4 +8,13 @@ Content-Type: application/json
 
 ###
 
-POST https://localhost:7265/api/room/101
+POST https://localhost:7265/api/room/register/101
+
+###
+
+POST https://localhost:7265/api/booking/book/101
+Content-Type: application/json
+{
+  "start": "2026-09-19T10:00:00",
+  "end": "2026-09-19T11:00:00"
+}

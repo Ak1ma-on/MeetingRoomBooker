@@ -16,15 +16,16 @@ namespace MeetingRoomBooker.API.Controllers
             this.roomService = roomService;
         }
 
-        [HttpPost("{number}")]
+        [HttpPost("register/{number}")]
         public IActionResult RegisterRoom(int number)
         {
             var result = roomService.RegisterRoom(number);
             if (result == RegisterRoomResult.InvalidNumber) return BadRequest("Invalud number of room");
+            if (result == RegisterRoomResult.RoomAlreadyExists) return BadRequest("Room with this number already exists");
             return NoContent();
         }
 
-        [HttpPost]
+        [HttpPost("free")]        
         public ActionResult<List<Room>> GetFreeRooms([FromBody] GetFreeRoomsRequest timeSpan)
         {
             var freeRooms = roomService.GetFreeRooms(timeSpan.Start, timeSpan.End);

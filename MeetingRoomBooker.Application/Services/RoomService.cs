@@ -17,6 +17,9 @@ namespace MeetingRoomBooker.Application.Services
         {
             if (number <= 0) return RegisterRoomResult.InvalidNumber;
 
+            var exist = roomRepository.GetByNumber(number);
+            if (exist.Status == Infrastructure.OperationResults.Status.Success) return RegisterRoomResult.RoomAlreadyExists;
+
             Room room = new Room(number);
             roomRepository.AddRoom(room);
             return RegisterRoomResult.Success;

@@ -5,6 +5,7 @@
         Success,
         IncorrectTimeSpan,
         IncorrectRoomNumber,
-        RoomHasNotFound
+        RoomHasNotFound,
+        BookingHasOverlap
     }
 }

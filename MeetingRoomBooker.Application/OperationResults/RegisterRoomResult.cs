@@ -3,6 +3,7 @@
     public enum RegisterRoomResult
     {
         Success,
+        RoomAlreadyExists,
         InvalidNumber
     }
 }

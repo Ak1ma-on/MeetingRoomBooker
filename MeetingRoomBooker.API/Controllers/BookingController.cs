@@ -16,6 +16,7 @@ namespace MeetingRoomBooker.API.Controllers
         }
 
         [HttpPost("book/{roomNumber}")]
+        [EndpointName("Add Booking")]
         public async Task<IActionResult> AddBooking(int roomNumber, [FromBody] AddBookingRequest request)
         {
             var result = await bookingService.AddBookingAsync(roomNumber, request.Start, request.End);

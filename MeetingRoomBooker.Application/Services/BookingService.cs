@@ -2,7 +2,6 @@
 using MeetingRoomBooker.Domain.Entities;
 using MeetingRoomBooker.Domain.Interfaces;
 using MeetingRoomBooker.Application.OperationResults;
-using System.Text.RegularExpressions;
 
 namespace MeetingRoomBooker.Application.Services
 {

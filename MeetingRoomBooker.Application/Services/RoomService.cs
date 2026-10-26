@@ -13,23 +13,25 @@ namespace MeetingRoomBooker.Application.Services
             roomRepository = repository;
         }
 
-        public RegisterRoomResult RegisterRoom(int number)
+        public async Task<RegisterRoomResult> RegisterRoomAsync(int number)
         {
             if (number <= 0) return RegisterRoomResult.InvalidNumber;
 
-            var exist = roomRepository.GetByNumber(number);
-            if (exist.Status == Infrastructure.OperationResults.Status.Success) return RegisterRoomResult.RoomAlreadyExists;
+            var ExistRoom = await roomRepository.GetByNumberAsync(number);
+
+            if (ExistRoom is not null) return RegisterRoomResult.RoomAlreadyExists;
 
             Room room = new Room(number);
-            roomRepository.AddRoom(room);
+            
+            await roomRepository.AddRoomAsync(room);
             return RegisterRoomResult.Success;
         }
 
-        public IEnumerable<Room> GetFreeRooms(DateTime start, DateTime end)
+        public async Task<IReadOnlyCollection<Room>> GetFreeRoomsAsync(DateTime start, DateTime end)
         {
             if (start >= end) throw new ArgumentException("Incorrect timespan");
 
-            return roomRepository.GetFreeRooms(start, end);
+            return await roomRepository.GetFreeRoomsAsync(start, end);
         }
     }
 }

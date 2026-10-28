@@ -22,8 +22,15 @@ namespace MeetingRoomBooker.Application.Services
             if (ExistRoom is not null) return RegisterRoomResult.RoomAlreadyExists;
 
             Room room = new Room(number);
-            
-            await roomRepository.AddRoomAsync(room);
+
+
+            try
+            {
+                await roomRepository.AddRoomAsync(room);
+            }
+            catch ()
+
+
             return RegisterRoomResult.Success;
         }
 

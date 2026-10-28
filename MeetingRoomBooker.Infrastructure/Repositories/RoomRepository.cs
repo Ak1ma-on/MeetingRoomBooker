@@ -14,29 +14,26 @@ namespace MeetingRoomBooker.Infrastructure.Repositories
             this.context = context;
         }
 
-        public GetRoomResult GetByNumber(int number)
+        public async Task<Room?> GetByNumberAsync(int number)
         {
-            Room? room = context.Rooms.SingleOrDefault(r => r.Number == number);
+            Room? room = await context.Rooms.SingleOrDefaultAsync(r => r.Number == number);
 
-            if (room is null) return new GetRoomResult { Status = Status.NotFound };
+            if (room is null) return null;
 
-            return new GetRoomResult
-            {
-                Room = room,
-                Status = Status.Success
-            };
+            return room;
         }
 
-        public IEnumerable<Room> GetFreeRooms(DateTime start, DateTime end)
+        public async Task<IReadOnlyCollection<Room>> GetFreeRoomsAsync(DateTime start, DateTime end)
         {
-            return context.Rooms
+            return await context.Rooms
                 .Include(r => r.Bookings)
-                .Where(r => !r.Bookings.Any(b => b.BookStart < end && b.BookEnd > start));
+                .Where(r => !r.Bookings.Any(b => b.BookStart < end && b.BookEnd > start))
+                .ToListAsync();
         }
 
-        public void AddRoom(Room room)
+        public async Task AddRoomAsync(Room room)
         {
-            context.Rooms.Add(room);
+            await context.Rooms.AddAsync(room);
             context.SaveChanges();
         }
     }

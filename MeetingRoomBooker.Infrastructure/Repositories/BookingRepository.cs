@@ -21,12 +21,10 @@ namespace MeetingRoomBooker.Infrastructure.Repositories
 
         public async Task<bool> HasOverlapAsync(Booking newBooking)
         {
-            Room? room = await context.Rooms.SingleOrDefaultAsync(r => r.Id == newBooking.RoomId);
-
-            List<Booking> conflictBookings = context.Bookings
-                .Where(b => b.BookStart >= newBooking.BookStart && b.BookStart < newBooking.BookEnd || b.BookEnd > newBooking.BookStart && b.BookEnd <= newBooking.BookEnd).ToList();
-
-            return conflictBookings.Count != 0;
+            return !await context.Bookings
+                .Where(b => b.RoomId == newBooking.RoomId)
+                .AnyAsync(b => b.BookEnd < newBooking.BookStart
+                || b.BookStart > newBooking.BookEnd);
         }
     }
 }

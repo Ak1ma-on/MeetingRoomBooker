@@ -1,7 +1,6 @@
 ﻿using MeetingRoomBooker.Application.Interfaces;
 using MeetingRoomBooker.Domain.Entities;
 using MeetingRoomBooker.Infrastructure.Data;
-using MeetingRoomBooker.Infrastructure.OperationResults;
 using Microsoft.EntityFrameworkCore;
 
 namespace MeetingRoomBooker.Infrastructure.Repositories
@@ -31,10 +30,19 @@ namespace MeetingRoomBooker.Infrastructure.Repositories
                 .ToListAsync();
         }
 
-        public async Task AddRoomAsync(Room room)
+        public async Task<bool> AddRoomAsync(Room room)
         {
-            await context.Rooms.AddAsync(room);
-            context.SaveChanges();
+            try
+            {
+                await context.Rooms.AddAsync(room);
+                await context.SaveChangesAsync();
+            }
+            catch (DbUpdateException)
+            {
+                return false;
+            }
+
+            return true;
         }
     }
 }

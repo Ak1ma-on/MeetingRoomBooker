@@ -21,6 +21,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MeetingRoomBooker.API", "Me
 		{F9C290DB-8CF4-4C67-8151-C10E027DBDFB} = {F9C290DB-8CF4-4C67-8151-C10E027DBDFB}
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MeetingRoomBooker.Tests", "MeetingRoomBooker.Tests\MeetingRoomBooker.Tests.csproj", "{8212EADA-F63B-46A5-9068-F1D5EBE4BE03}"
+	ProjectSection(ProjectDependencies) = postProject
+		{3D7C85E2-F5E5-4C92-841F-60F24C6BA657} = {3D7C85E2-F5E5-4C92-841F-60F24C6BA657}
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -79,6 +84,18 @@ Global
 		{2EFFE3EC-5915-86B3-E6E6-2C081C8EB4C3}.Release|x64.Build.0 = Release|Any CPU
 		{2EFFE3EC-5915-86B3-E6E6-2C081C8EB4C3}.Release|x86.ActiveCfg = Release|Any CPU
 		{2EFFE3EC-5915-86B3-E6E6-2C081C8EB4C3}.Release|x86.Build.0 = Release|Any CPU
+		{8212EADA-F63B-46A5-9068-F1D5EBE4BE03}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8212EADA-F63B-46A5-9068-F1D5EBE4BE03}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8212EADA-F63B-46A5-9068-F1D5EBE4BE03}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{8212EADA-F63B-46A5-9068-F1D5EBE4BE03}.Debug|x64.Build.0 = Debug|Any CPU
+		{8212EADA-F63B-46A5-9068-F1D5EBE4BE03}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{8212EADA-F63B-46A5-9068-F1D5EBE4BE03}.Debug|x86.Build.0 = Debug|Any CPU
+		{8212EADA-F63B-46A5-9068-F1D5EBE4BE03}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8212EADA-F63B-46A5-9068-F1D5EBE4BE03}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8212EADA-F63B-46A5-9068-F1D5EBE4BE03}.Release|x64.ActiveCfg = Release|Any CPU
+		{8212EADA-F63B-46A5-9068-F1D5EBE4BE03}.Release|x64.Build.0 = Release|Any CPU
+		{8212EADA-F63B-46A5-9068-F1D5EBE4BE03}.Release|x86.ActiveCfg = Release|Any CPU
+		{8212EADA-F63B-46A5-9068-F1D5EBE4BE03}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

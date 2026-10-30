@@ -17,18 +17,18 @@ namespace MeetingRoomBooker.API.Controllers
         }
 
         [HttpPost("register/{number}")]
-        public IActionResult RegisterRoom(int number)
+        public async Task<IActionResult> RegisterRoomAsync(int number)
         {
-            var result = roomService.RegisterRoom(number);
+            var result = await roomService.RegisterRoomAsync(number);
             if (result == RegisterRoomResult.InvalidNumber) return BadRequest("Invalud number of room");
             if (result == RegisterRoomResult.RoomAlreadyExists) return BadRequest("Room with this number already exists");
             return NoContent();
         }
 
         [HttpPost("free")]        
-        public ActionResult<List<Room>> GetFreeRooms([FromBody] GetFreeRoomsRequest timeSpan)
+        public async Task<ActionResult<List<Room>>> GetFreeRoomsAsync([FromBody] GetFreeRoomsRequest timeSpan)
         {
-            var freeRooms = roomService.GetFreeRooms(timeSpan.Start, timeSpan.End);
+            var freeRooms = await roomService.GetFreeRoomsAsync(timeSpan.Start, timeSpan.End);
             return Ok(freeRooms);
         }
     }

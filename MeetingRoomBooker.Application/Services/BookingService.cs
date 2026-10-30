@@ -23,7 +23,7 @@ namespace MeetingRoomBooker.Application.Services
             if (start >= end) return AddBookingResult.IncorrectTimeSpan;
             if (roomNumber <= 0) return AddBookingResult.IncorrectRoomNumber;
 
-            Room room = roomRepository.GetByNumber(roomNumber).Room;
+            Room? room = await roomRepository.GetByNumberAsync(roomNumber);
             if (room is null) return AddBookingResult.RoomHasNotFound;
 
             Booking booking = new Booking(room.Id, start, end, clock);

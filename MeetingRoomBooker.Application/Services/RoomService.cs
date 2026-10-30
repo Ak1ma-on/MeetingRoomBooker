@@ -17,19 +17,16 @@ namespace MeetingRoomBooker.Application.Services
         {
             if (number <= 0) return RegisterRoomResult.InvalidNumber;
 
-            var ExistRoom = await roomRepository.GetByNumberAsync(number);
+            var existingRoom = await roomRepository.GetByNumberAsync(number);
 
-            if (ExistRoom is not null) return RegisterRoomResult.RoomAlreadyExists;
+            if (existingRoom is not null) return RegisterRoomResult.RoomAlreadyExists;
 
             Room room = new Room(number);
 
-
-            try
+            if (!await roomRepository.AddRoomAsync(room))
             {
-                await roomRepository.AddRoomAsync(room);
+                return RegisterRoomResult.RoomAlreadyExists;
             }
-            catch ()
-
 
             return RegisterRoomResult.Success;
         }

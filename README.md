@@ -58,7 +58,7 @@ MeetingRoomBooker/
 1. Clone the repository:
 
 ```bash
-git clone [<repository-url>](https://github.com/Ak1ma-on/MeetingRoomBooker.git)
+git clone https://github.com/Ak1ma-on/MeetingRoomBooker.git
 cd MeetingRoomBooker
 ```
 
